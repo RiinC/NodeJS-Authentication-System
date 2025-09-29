@@ -24,10 +24,12 @@ Before running the application locally, ensure you have set up the following env
 2. **DB_URL**: MongoDB database connection URL.
 3. **CLIENT_ID**: Google OAuth client ID.
 4. **CLIENT_SECRET**: Google OAuth client secret (sign in with Google).
-5. **EMAIL**: Email address for sending emails.
-6. **PASSWORD**: App-specific password or regular password for the Gmail account.
-7. **RECAPTCHA_SECRET_KEY**: Google reCAPTCHA secret key.
-8. **CLIENT_URL**: URL to redirect after signing in with Google, e.g., "http://localhost:3000/auth/login/success".
+5. **CALLBACK_URL**: Google OAuth callback URL after successful authentication.
+6. **EMAIL**: Email address for sending emails.
+7. **PASSWORD**: App-specific password or regular password for the Gmail account.
+8. **RECAPTCHA_SITE_KEY**: Google reCAPTCHA site key (used on the client-side).
+9. **RECAPTCHA_SECRET_KEY**: Google reCAPTCHA secret key.
+10. **CLIENT_URL**: URL to redirect after signing in with Google, e.g., "http://localhost:3000/auth/login/success".
 
 Ensure that you have the appropriate values for each variable before running the application.
 
@@ -35,14 +37,33 @@ Example `.env` file:
 
 ```plaintext
 PORT=3000
-DB_URL=mongodb://localhost:27017/authdatabase
-CLIENT_ID=your_client_id
-CLIENT_SECRET=your_client_secret
-EMAIL=your_email@gmail.com
-PASSWORD=your_gmail_password
-RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key
-CLIENT_URL=http://localhost:3000/auth/login/success
+DB_URL=mongodb://localhost:27017/your-database-name
+CLIENT_ID=your-google-client-id
+CLIENT_SECRET=your-google-client-secret
+CALLBACK_URL=http://localhost:3000/auth/google/callback
+EMAIL=your-email@gmail.com
+PASSWORD=your-app-specific-password
+RECAPTCHA_SITE_KEY=your-recaptcha-site-key
+RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
+CLIENT_URL=https://nodejs-authentication-system-l2pu.onrender.com/auth/login/success
 ```
+
+### Setting up Environment Variables:
+
+1. **Google OAuth Setup**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable Google+ API
+   - Configure OAuth consent screen
+   - Create credentials (OAuth client ID)
+   - Copy Client ID and Client Secret to your `.env` file
+
+2. **reCAPTCHA Setup**:
+   - Visit [reCAPTCHA Admin](https://www.google.com/recaptcha/admin/create)
+   - Register a new site
+   - Select reCAPTCHA v2 "I'm not a robot"
+   - Add your domain
+   - Copy Site Key and Secret Key to your `.env` file
 
 ## Folder
   ```text
@@ -99,48 +120,6 @@ Key dependencies and their purposes:
    ```bash
    npm start
 4. Open your web browser and visit http://localhost:3000 to access the application.
-
-## Environment Variables Setup
-
-Create a `.env` file in the root directory with the following variables:
-
-```plaintext
-PORT=3000
-DB_URL=mongodb://localhost:27017/your-database-name
-
-# Google OAuth (https://console.cloud.google.com/)
-CLIENT_ID=your-google-client-id
-CLIENT_SECRET=your-google-client-secret
-CALLBACK_URL=http://localhost:3000/auth/google/callback
-
-# reCAPTCHA (https://www.google.com/recaptcha/admin/create)
-RECAPTCHA_SITE_KEY=your-recaptcha-site-key
-RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
-
-# Email Configuration
-EMAIL=your-email@gmail.com
-PASSWORD=your-app-specific-password
-
-# Production URL
-CLIENT_URL=https://nodejs-authentication-system-l2pu.onrender.com/auth/login/success
-```
-
-### Setting up Environment Variables:
-
-1. **Google OAuth Setup**:
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select existing one
-   - Enable Google+ API
-   - Configure OAuth consent screen
-   - Create credentials (OAuth client ID)
-   - Copy Client ID and Client Secret to your .env file
-
-2. **reCAPTCHA Setup**:
-   - Visit [reCAPTCHA Admin](https://www.google.com/recaptcha/admin/create)
-   - Register a new site
-   - Select reCAPTCHA v2 "I'm not a robot"
-   - Add your domain
-   - Copy Site Key and Secret Key to your .env file
 
 ## Testing the Application
 
